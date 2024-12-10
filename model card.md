@@ -58,4 +58,4 @@ Regional differences in housing markets not captured by the model
 Unexpected Results
 The model showed exceptionally high performance on the training data, with an R² score of 0.9998, which suggests potential overfitting. This unexpected result warrants further investigation and validation on unseen data.
 
-Link to Jupyter Notebook
+Link to Jupyter Notebook house_prices_model.ipynb 
