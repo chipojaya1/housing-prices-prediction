@@ -15,7 +15,16 @@
 ## Training Data
 - **Source**: Kaggle's "House Prices: Advanced Regression Techniques" competition dataset
 - **Number of Rows**: 1,460 in training data
-- **Key Features**: OverallQual, GrLivArea, TotalBsmtSF, GarageCars, FullBath, YearBuilt, LotArea
+- **Key Features**: SalePrice: Target variable for predictions.
+YearBuilt: Year the house was built.
+YearRemodAdd: Year the house was remodeled.
+LotArea: Lot area in square feet.
+OverallQual: Overall quality rating (1-10 scale).
+OverallCond: Overall condition rating (1-9 scale).
+MasVnrArea: Masonry veneer area in square feet.
+GrLivArea: Above ground living area square footage.
+GarageArea: Size of the garage in square feet.
+Neighborhood: Categorical variable representing the neighborhood of the property.
 
 ## Test Data
 - **Source**: Kaggle's "House Prices: Advanced Regression Techniques" test dataset
@@ -23,7 +32,7 @@
 - **Differences**: The test dataset lacks the `SalePrice` column, which is the target variable in the training dataset.
 
 ## Model Details
-- **Input Features**: OverallQual, GrLivArea, TotalBsmtSF, GarageCars, FullBath, YearBuilt, LotArea
+- **Input Features**: The key variables listed above, along with other relevant features from the dataset.
 - **Target Variable**: SalePrice (continuous numerical variable)
 - **Type of Model**: XGBoost Regressor
 - **Software Used**: Python 3.8, scikit-learn 0.24.2, XGBoost 1.4.2
