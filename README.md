@@ -16,7 +16,6 @@
 ### Training Data
   * Data dictionary:
   
-  | ---- | ------------- | ---------------- | ---------- |
   | Name | Modeling Role | Measurement Level | Description |
   | ---- | ------------- | ---------------- | ---------- |
   | **MSSubClass** | Input | Categorical | Identifies the type of dwelling involved in the sale |
@@ -119,20 +118,21 @@
     'Functional', 'Fireplaces', 'FireplaceQu', 'GarageType', 'GarageYrBlt', 'GarageFinish', 'GarageCars', 'GarageArea', 'GarageQual', 'GarageCond', 'PavedDrive', 
     'WoodDeckSF', 'OpenPorchSF', 'EnclosedPorch', '3SsnPorch', 'ScreenPorch', 'PoolArea', 'MiscVal', 'MoSold', 'YrSold', 'SaleType', 'SaleCondition', 'PropertyType'
 * **Target Variable**: 'SalePrice'
-* **Type of Model**: `Linear Regression`, `Ridge`, `Lasso`, `Elastic Net`, `Random Forest` and `XGBoost`(best model)
-* **Software**: Google Collab, Python 3.8, scikit-learn 0.24.2.
+* **Models Trained**: `Linear Regression`, `Ridge Regression`, `Lasso Regression`, `Elastic Net Regression`, `Random Forest Regressor` and `XGBoost Regressor`(best model) Models Trained:
+* **Software**: Google Collab, Python 3.8
   * Libraries:** `pandas` , `numpy`,`scikit-learn`, `matplotlib`, `seaborn` 
-  * Feature Engnieering:**   `k-fold croos validation`, `RandomSearchCV`, `ShuffleSplit` 
+  * Feature Engineering Techniques:** `Missing value imputation`, `Encoding categorical variables`, `Feature scaling and normalization`, `New feature creation` `k-fold croos validation`, `RandomSearchCV`, `ShuffleSplit` 
+Cross-validation (k-fold).
+Hyperparameter tuning using GridSearchCV and RandomizedSearchCV.
 * **Hyperparameters**:
-   * Final Hyperparameters:
-   * `subsample`: 0.6
-     * `n_estimators`: 1000
-     * `max_depth`: 3 
-     * `min_child_weight`: 1
-     * `max_depth`: 0.1
-     * `learning_rate`: 0.1
-     * `colsample_bytree`: 0.8
-Best score found:  28166.007315286897
+   Final XGBoost Hyperparameters:
+  ` n_estimators`: 1000
+   `max_depth`: 3
+   `learning_rate`: 0.1
+   `subsample`: 0.6
+   `colsample_bytree`: 0.8
+   `min_child_weight`: 1
+   Best score found`:  28166.007315286897
   Code Snippet
 ```
 XGBRegressor(base_score=None, booster=None, callbacks=None,
@@ -150,12 +150,23 @@ XGBRegressor(base_score=None, booster=None, callbacks=None,
 
 ### Quantitative Analysis
   Models where assesed primarily with 
-- **Metrics Used**: Root Mean Squared Error (RMSE), R-squared (R²)
-- **Final Values**:
-  - Best Model Score (MSE):  
-  - Cross-Validation RMSE: $31,178.57 ( )
+- **Metrics Used**: Root Mean Squared Error (RMSE), R-squared (R²), Mean Absolute Error (MAE)
+- **Final Model Performance**:
+   * Models:
+     
+     | Metric	| XGBoost (Best Model) |	Ridge Regression	| Lasso Regression	| Random Forest	| Elastic Net | 
+     | ---- | ---------------- | ---------------- | ------------ | -------------- | ---------- |
+     | Training RMSE	| $12,127.06	| $31,547.36	| $31,538.01	| $15,904.87	| $32,677.04 |
+     | Training R² Score | 0.9767	| 0.8422	| 0.8423	| 0.9599	| 0.8307 |
+     | Training MAE	| $4,054.29 |	$19,429.71	| $19,428.81	| $8,756.69	|$18,975.31 |
+     | Validation RMSE	| $27,064.08 |	$34,764.12	| $34,748.47	| $27,965.45	| $35,048.92 |
+     | Validation R² Score	| 0.9045	| 0.8424	| 0.8426	| 0.8980	| 0.8398 |
+     | Validation MAE	| $17,940.22	| $21,697.80	| $21,721.28 |	$17,528.74	| $20,377.16 |
+- **Cross-validation Results (XGBoost)**:
+  `Mean RMSE`: $28,589.58
+  `Standard Deviation of RMSE`: ±$3,814.78
 
-## Potential Negative Impacts
+## Potential Negative Impacts and Ethical Considerations
 1. **Mathematical or Software Problems**:
    - Potential overfitting to training data
    - Bias towards features more common in the training dataset
@@ -174,6 +185,6 @@ XGBRegressor(base_score=None, booster=None, callbacks=None,
    - Regional differences in housing markets not captured by the model
 
 ## Unexpected Results
-The model showed exceptionally high performance on the training data, with an R² score of 0.9998, which suggests potential overfitting. This unexpected result warrants further investigation and validation on unseen data.
+The model showed exceptionally high performance on the training data, with an R² score of 0.9998, which suggests potential overfitting. This unexpected result warrants further investigation and validation on larger unseen data. 
 
 [Link to Jupyter Notebook](https://github.com/chipojaya1/housing-prices-prediction/blob/main/house_prices_model.ipynb)
