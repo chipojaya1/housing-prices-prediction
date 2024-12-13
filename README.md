@@ -102,8 +102,8 @@
   * **Source of the Data**: Kaggle's "House Prices: Advanced Regression Techniques" competition dataset
   * **How training data was divided into training and validation data**: 70% training, 30% validation
   * **Number of Rows**: 1,460 in training data
-    * Training rows: 
-    * Validation rows: 
+    * Training rows: Training data shape: 1168
+    * Validation rows: 292
 
 ### Test Data
 * **Source**: Kaggle's "House Prices: Advanced Regression Techniques" test dataset
@@ -119,70 +119,41 @@
     'Functional', 'Fireplaces', 'FireplaceQu', 'GarageType', 'GarageYrBlt', 'GarageFinish', 'GarageCars', 'GarageArea', 'GarageQual', 'GarageCond', 'PavedDrive', 
     'WoodDeckSF', 'OpenPorchSF', 'EnclosedPorch', '3SsnPorch', 'ScreenPorch', 'PoolArea', 'MiscVal', 'MoSold', 'YrSold', 'SaleType', 'SaleCondition', 'PropertyType'
 * **Target Variable**: 'SalePrice'
-* **Type of Model**: `Linear Regression`, `Ridge`, `Lasso`, `Decision tree`, `Random Forest` and `XGBoost`(best model)
+* **Type of Model**: `Linear Regression`, `Ridge`, `Lasso`, `Elastic Net`, `Random Forest` and `XGBoost`(best model)
 * **Software**: Google Collab, Python 3.8, scikit-learn 0.24.2.
   * Libraries:** `pandas` , `numpy`,`scikit-learn`, `matplotlib`, `seaborn` 
-  * Feature Engnieering:**   `k-fold croos validation`, `GridSearchCV`, `ShuffleSplit` 
+  * Feature Engnieering:**   `k-fold croos validation`, `RandomSearchCV`, `ShuffleSplit` 
 * **Hyperparameters**:
    * Final Hyperparameters:
-     * `n_estimators`: 200
+   * `subsample`: 0.6
+     * `n_estimators`: 1000
      * `max_depth`: 3 
+     * `min_child_weight`: 1
+     * `max_depth`: 0.1
      * `learning_rate`: 0.1
+     * `colsample_bytree`: 0.8
+Best score found:  28166.007315286897
   Code Snippet
 ```
 XGBRegressor(base_score=None, booster=None, callbacks=None,
- colsample_bylevel=None, colsample_bynode=None,
- colsample_bytree=None, device=None, early_stopping_round
-s=None,
- enable_categorical=False, eval_metric=None, feature_type
-s=None,
- gamma=None, grow_policy=None, importance_type=None,
- interaction_constraints=None, learning_rate=None, max_bi
-n=None,
-```
-
-  Best model comaprison snippet
-```
-Model Comparison Results:
- model best_score \
-0 linear_regression -2.237140e+09 
-1 ridge -2.040058e+09 
-2 lasso -2.233890e+09 
-3 decision_tree -1.900330e+09 
-4 random_forest -1.048163e+09 
-5 xgboost -7.514747e+08 
- best_params 
-0 {'fit_intercept': False} 
-1 {'alpha': 100} 
-2 {'alpha': 10} 
-3 {'criterion': 'squared_error', 'splitter': 'be... 
-4 {'max_depth': 10, 'min_samples_split': 2, 'n_e... 
-5 {'learning_rate': 0.1, 'max_depth': 3, 'n_esti... 
-Best Model: xgboost
-Best Score (MSE): 751474682.02
-Best Parameters: {'learning_rate': 0.1, 'max_depth': 3, 'n_estimators': 200}
+             colsample_bylevel=None, colsample_bynode=None,
+             colsample_bytree=None, device=None, early_stopping_rounds=None,
+             enable_categorical=False, eval_metric=None, feature_types=None,
+             gamma=None, grow_policy=None, importance_type=None,
+             interaction_constraints=None, learning_rate=None, max_bin=None,
+             max_cat_threshold=None, max_cat_to_onehot=None,
+             max_delta_step=None, max_depth=None, max_leaves=None,
+             min_child_weight=None, missing=nan, monotone_constraints=None,
+             multi_strategy=None, n_estimators=None, n_jobs=-1,
+             num_parallel_tree=None, random_state=42, ...)
 ```
 
 ### Quantitative Analysis
   Models where assesed primarily with 
 - **Metrics Used**: Root Mean Squared Error (RMSE), R-squared (R²)
 - **Final Values**:
-  - Best Model Score (MSE): 751,474,682.02
-  - Cross-Validation RMSE: $31,178.57 (± $7,242.93)
-
-### Prediction Results
-  * Summary of Predicted Sale Prices:
-  
-   | Description  | Count |
-  | ---- | ------------- |
-  | **count** | 1459.000000 |
-  | **mean** |178398.000000 |
-  | **std** | 77240.812500 |
-  | **min** | 40350.679688 |
-  | **25%** | 128289.082031 |
-  | **50%** | 159089.734375 |
-  | **75%** | 208932.554688 |
-  | **max** | 708729.125000 |
+  - Best Model Score (MSE):  
+  - Cross-Validation RMSE: $31,178.57 ( )
 
 ## Potential Negative Impacts
 1. **Mathematical or Software Problems**:
